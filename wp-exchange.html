@@ -323,6 +323,90 @@
   }
   .social-btn:hover { border-color:var(--orange); color:var(--orange-light); }
 
+  /* PROMO BANNER */
+  .promo-banner {
+    background:linear-gradient(90deg, #E85B1B 0%, #C44A10 50%, #A83A08 100%);
+    padding:20px 4rem; display:flex; align-items:center; justify-content:space-between; gap:20px;
+  }
+  .promo-text { color:#fff; }
+  .promo-tag { font-size:11px; font-weight:700; letter-spacing:.15em; text-transform:uppercase; opacity:.75; margin-bottom:4px; }
+  .promo-msg { font-family:'Prompt',sans-serif; font-size:20px; font-weight:700; }
+  .promo-sub { font-size:13px; opacity:.8; margin-top:2px; }
+  .promo-cta {
+    background:#fff; color:var(--orange-dark);
+    padding:11px 28px; border-radius:6px;
+    font-family:'Prompt',sans-serif; font-size:15px; font-weight:700;
+    text-decoration:none; white-space:nowrap; flex-shrink:0;
+    transition:transform .15s;
+  }
+  .promo-cta:hover { transform:scale(1.03); }
+
+  /* HOW TO STEPS */
+  .steps-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(200px,1fr)); gap:0; position:relative; }
+  .step-card { padding:32px 24px; text-align:center; position:relative; }
+  .step-card:not(:last-child)::after {
+    content:'→'; position:absolute; right:-12px; top:50%;
+    transform:translateY(-50%); font-size:22px; color:var(--orange);
+    z-index:1;
+  }
+  .step-num {
+    width:52px; height:52px; background:var(--orange);
+    border-radius:50%; display:flex; align-items:center; justify-content:center;
+    font-family:'Prompt',sans-serif; font-size:20px; font-weight:700; color:#fff;
+    margin:0 auto 16px;
+  }
+  .step-icon { font-size:28px; margin-bottom:10px; }
+  .step-title { font-family:'Prompt',sans-serif; font-size:16px; font-weight:600; margin-bottom:8px; }
+  .step-desc { color:var(--gray); font-size:13px; line-height:1.6; }
+
+  /* TESTIMONIALS */
+  .reviews-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(280px,1fr)); gap:20px; }
+  .review-card {
+    background:#fff; border:1px solid var(--border);
+    border-radius:12px; padding:24px; position:relative;
+  }
+  .review-quote { font-size:36px; color:var(--orange); opacity:.3; line-height:1; margin-bottom:8px; font-family:Georgia,serif; }
+  .review-text { font-size:14px; line-height:1.75; color:#2D1F0A; margin-bottom:16px; }
+  .review-stars { color:#F5C842; font-size:14px; margin-bottom:10px; }
+  .review-author { display:flex; align-items:center; gap:10px; }
+  .review-avatar {
+    width:36px; height:36px; border-radius:50%;
+    background:var(--orange); display:flex; align-items:center; justify-content:center;
+    color:#fff; font-family:'Prompt',sans-serif; font-size:13px; font-weight:700;
+  }
+  .review-name { font-weight:600; font-size:14px; }
+  .review-meta { font-size:12px; color:var(--gray); }
+
+  /* FAQ */
+  .faq-list { max-width:760px; margin:0 auto; }
+  .faq-item {
+    border:1px solid var(--border); border-radius:10px;
+    margin-bottom:10px; overflow:hidden;
+  }
+  .faq-q {
+    width:100%; background:none; border:none; padding:18px 20px;
+    display:flex; justify-content:space-between; align-items:center;
+    font-family:'Prompt',sans-serif; font-size:15px; font-weight:600;
+    cursor:pointer; text-align:left; color:#1A1208; transition:background .15s;
+  }
+  .faq-q:hover { background:#FFF8F0; }
+  .faq-q.open { background:#FFF8F0; color:var(--orange); }
+  .faq-icon { font-size:18px; transition:transform .2s; flex-shrink:0; margin-left:12px; }
+  .faq-q.open .faq-icon { transform:rotate(45deg); }
+  .faq-a {
+    max-height:0; overflow:hidden; transition:max-height .3s ease, padding .2s;
+    font-size:14px; line-height:1.75; color:var(--gray); padding:0 20px;
+  }
+  .faq-a.open { max-height:300px; padding:0 20px 18px; }
+
+  /* MAP */
+  .map-wrap {
+    border-radius:12px; overflow:hidden;
+    border:1px solid var(--border); height:360px;
+  }
+  .map-wrap iframe { width:100%; height:100%; border:none; display:block; }
+  .location-grid { display:grid; grid-template-columns:1fr 1fr; gap:32px; align-items:start; }
+
   @media(max-width:768px) {
     nav { padding:0 1.5rem; }
     nav ul { display:none; }
@@ -335,6 +419,10 @@
     .contact-grid { grid-template-columns:1fr; }
     .footer-grid { grid-template-columns:1fr 1fr; }
     footer { padding:40px 1.5rem 20px; }
+    .promo-banner { flex-direction:column; padding:20px 1.5rem; text-align:center; }
+    .steps-grid { grid-template-columns:1fr 1fr; }
+    .step-card:not(:last-child)::after { display:none; }
+    .location-grid { grid-template-columns:1fr; }
   }
 </style>
 </head>
@@ -351,8 +439,9 @@
   </a>
   <ul>
     <li><a href="#rates">อัตราแลกเปลี่ยน</a></li>
+    <li><a href="#how-to">วิธีแลก</a></li>
     <li><a href="#services">บริการ</a></li>
-    <li><a href="#calculator">คำนวณ</a></li>
+    <li><a href="#faq">FAQ</a></li>
     <li><a href="#contact">ติดต่อ</a></li>
     <li><a href="https://lin.ee/yDRo21s" class="nav-cta">LINE: WPEXCHANGE</a></li>
   </ul>
@@ -382,6 +471,16 @@
       <span class="tick-item">🇦🇺 AUD/THB ซื้อ 21.80 ขาย 22.30 <span class="tick-sep">|</span></span>
     </div>
   </div>
+</div>
+
+<!-- PROMO BANNER -->
+<div class="promo-banner">
+  <div class="promo-text">
+    <div class="promo-tag">🎉 โปรโมชั่นพิเศษ</div>
+    <div class="promo-msg">แลกหยวนจีน CNY วันนี้ รับเรทพิเศษ!</div>
+    <div class="promo-sub">ยิ่งแลกเยอะ ยิ่งได้เรทดี · ไม่มีค่าธรรมเนียมซ่อน · ทุกวัน 09:00–20:00</div>
+  </div>
+  <a href="https://lin.ee/yDRo21s" class="promo-cta">💬 ถามเรทตอนนี้</a>
 </div>
 
 <!-- HERO -->
@@ -421,6 +520,44 @@
       </div>
       <div style="height:24px"></div>
     </div>
+  </div>
+</section>
+
+<!-- HOW TO EXCHANGE -->
+<section class="section" id="how-to" style="background:#FFF8F0;">
+  <div class="section-header">
+    <div class="section-tag">ขั้นตอน</div>
+    <h2 class="section-title">แลกเงินกับเรา ง่ายมาก 4 ขั้นตอน</h2>
+    <p class="section-sub">ไม่ต้องนัด ไม่ต้องรอคิว ดูเรทออนไลน์แล้วมาแลกได้เลย</p>
+  </div>
+  <div class="steps-grid">
+    <div class="step-card">
+      <div class="step-num">1</div>
+      <div class="step-icon">📱</div>
+      <div class="step-title">ดูเรทออนไลน์</div>
+      <p class="step-desc">เช็คอัตราแลกเปลี่ยนบนเว็บไซต์หรือ LINE ได้เลย อัปเดตทุกวัน ราคาชัดเจน ไม่มีค่าธรรมเนียมซ่อน</p>
+    </div>
+    <div class="step-card">
+      <div class="step-num">2</div>
+      <div class="step-icon">💬</div>
+      <div class="step-title">แจ้งจำนวนทาง LINE</div>
+      <p class="step-desc">ติดต่อผ่าน LINE: WPEXCHANGE แจ้งสกุลเงินและจำนวนที่ต้องการ ทีมงานตอบกลับรวดเร็ว</p>
+    </div>
+    <div class="step-card">
+      <div class="step-num">3</div>
+      <div class="step-icon">🏦</div>
+      <div class="step-title">มาที่ร้านหรือโอนออนไลน์</div>
+      <p class="step-desc">เดินทางมาที่สาขาเชียงใหม่ หรือสำหรับบริการโอนเงิน ทำได้ทางออนไลน์ได้เลย ไม่ต้องเดินทาง</p>
+    </div>
+    <div class="step-card">
+      <div class="step-num">4</div>
+      <div class="step-icon">✅</div>
+      <div class="step-title">รับเงินทันที</div>
+      <p class="step-desc">รับเงินสดหรือโอนเข้าบัญชีทันที มีใบเสร็จรับรอง ถูกกฎหมาย มีใบอนุญาตจากธนาคารแห่งประเทศไทย</p>
+    </div>
+  </div>
+  <div style="text-align:center; margin-top:36px;">
+    <a href="https://lin.ee/yDRo21s" class="btn-primary" style="display:inline-flex;">💬 เริ่มแลกเงินเลย</a>
   </div>
 </section>
 
@@ -534,7 +671,151 @@
   </div>
 </section>
 
-<!-- WHY CHOOSE US -->
+<!-- TESTIMONIALS -->
+<section class="section" style="background:#FFF8F0;">
+  <div class="section-header">
+    <div class="section-tag">รีวิวลูกค้า</div>
+    <h2 class="section-title">ลูกค้าพูดถึงเรา</h2>
+    <p class="section-sub">ความไว้วางใจจากลูกค้ากว่า 500 คนต่อเดือน</p>
+  </div>
+  <div class="reviews-grid">
+    <div class="review-card">
+      <div class="review-quote">"</div>
+      <div class="review-stars">★★★★★</div>
+      <p class="review-text">แลกหยวนจีนที่นี่มาหลายปีแล้ว เรทดีมาก ไม่เคยโกง ทีมงานใจดี ตอบ LINE เร็วมาก แนะนำเลยครับ</p>
+      <div class="review-author">
+        <div class="review-avatar">ส</div>
+        <div>
+          <div class="review-name">สมชาย ก.</div>
+          <div class="review-meta">นักธุรกิจ นำเข้าสินค้าจีน · เชียงใหม่</div>
+        </div>
+      </div>
+    </div>
+    <div class="review-card">
+      <div class="review-quote">"</div>
+      <div class="review-stars">★★★★★</div>
+      <p class="review-text">ใช้บริการชิปปิ้งจีน-ไทย สินค้ามาครบ ไม่หาย บริการดีมาก ราคาสมเหตุสมผล จะกลับมาใช้แน่นอน</p>
+      <div class="review-author">
+        <div class="review-avatar">น</div>
+        <div>
+          <div class="review-name">นภาพร ว.</div>
+          <div class="review-meta">เจ้าของร้านค้าออนไลน์ · เชียงใหม่</div>
+        </div>
+      </div>
+    </div>
+    <div class="review-card">
+      <div class="review-quote">"</div>
+      <div class="review-stars">★★★★★</div>
+      <p class="review-text">โอนเงินไปจีนได้เร็วมาก เรทดีกว่าธนาคารเยอะ และมีล่ามช่วยเจรจาธุรกิจด้วย ครบจบที่เดียวจริงๆ</p>
+      <div class="review-author">
+        <div class="review-avatar">ว</div>
+        <div>
+          <div class="review-name">วิชัย ป.</div>
+          <div class="review-meta">ผู้นำเข้า-ส่งออก · เชียงราย</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section class="section" id="faq">
+  <div class="section-header">
+    <div class="section-tag">คำถามที่พบบ่อย</div>
+    <h2 class="section-title">FAQ มีคำตอบให้ทุกข้อสงสัย</h2>
+  </div>
+  <div class="faq-list">
+    <div class="faq-item">
+      <button class="faq-q" onclick="toggleFaq(this)">
+        ต้องนัดล่วงหน้าก่อนแลกเงินไหม?
+        <span class="faq-icon">+</span>
+      </button>
+      <div class="faq-a">ไม่จำเป็นเลยครับ เดินเข้ามาแลกได้เลยโดยไม่ต้องนัด แต่ถ้าต้องการแลกจำนวนมาก (เกิน 50,000 บาท) แนะนำให้แจ้งล่วงหน้าทาง LINE เพื่อให้เตรียมเงินไว้ให้พร้อม</div>
+    </div>
+    <div class="faq-item">
+      <button class="faq-q" onclick="toggleFaq(this)">
+        มีเอกสารอะไรบ้างที่ต้องใช้ในการแลกเงิน?
+        <span class="faq-icon">+</span>
+      </button>
+      <div class="faq-a">สำหรับการแลกเงินทั่วไปใช้แค่บัตรประชาชนหรือพาสปอร์ตเท่านั้น ไม่มีเอกสารซับซ้อน บริการของเราถูกต้องตามกฎหมายและได้รับใบอนุญาตจากธนาคารแห่งประเทศไทย</div>
+    </div>
+    <div class="faq-item">
+      <button class="faq-q" onclick="toggleFaq(this)">
+        แลกเงินขั้นต่ำเท่าไหร่?
+        <span class="faq-icon">+</span>
+      </button>
+      <div class="faq-a">ไม่มีขั้นต่ำครับ แลกได้ทุกจำนวน ตั้งแต่จำนวนน้อยไปถึงจำนวนมาก แต่เรทอาจดีขึ้นสำหรับการแลกจำนวนมาก สอบถามได้ทาง LINE</div>
+    </div>
+    <div class="faq-item">
+      <button class="faq-q" onclick="toggleFaq(this)">
+        รับสั่งซื้อสินค้าจีนได้ทุกแพลตฟอร์มไหม?
+        <span class="faq-icon">+</span>
+      </button>
+      <div class="faq-a">รับได้ทุกแพลตฟอร์มครับ ทั้ง Taobao (淘宝), 1688, Pinduoduo (拼多多), JD.com, Tmall และอีกมากมาย ส่งลิงก์สินค้ามาทาง LINE ได้เลย ทีมงานจะดูแลให้ตั้งแต่สั่งซื้อจนถึงมือคุณ</div>
+    </div>
+    <div class="faq-item">
+      <button class="faq-q" onclick="toggleFaq(this)">
+        ชิปปิ้งจีน-ไทย ใช้เวลากี่วัน?
+        <span class="faq-icon">+</span>
+      </button>
+      <div class="faq-a">ทางบก 7–12 วันทำการ ทางเรือ 20–30 วันทำการ ขึ้นอยู่กับประเภทและน้ำหนักสินค้า สามารถติดตามสถานะได้ตลอดทาง</div>
+    </div>
+    <div class="faq-item">
+      <button class="faq-q" onclick="toggleFaq(this)">
+        สกุลเงินอะไรที่แลกได้บ้าง?
+        <span class="faq-icon">+</span>
+      </button>
+      <div class="faq-a">รองรับมากกว่า 30 สกุลเงินทั่วโลก ได้แก่ หยวนจีน (CNY), ดอลลาร์สหรัฐ (USD), ยูโร (EUR), เยนญี่ปุ่น (JPY), ปอนด์อังกฤษ (GBP), ดอลลาร์สิงคโปร์ (SGD), ฮ่องกง (HKD), วอนเกาหลี (KRW) และอีกมาก ถามได้ทาง LINE</div>
+    </div>
+  </div>
+</section>
+
+<!-- MAP & LOCATION -->
+<section class="section" style="background:#FFF8F0;">
+  <div class="section-header">
+    <div class="section-tag">ที่ตั้ง</div>
+    <h2 class="section-title">หาเราเจอง่ายๆ ใจกลางเชียงใหม่</h2>
+    <p class="section-sub">ใกล้กับ Lanna Home ถนนช้างคลาน เมืองเชียงใหม่</p>
+  </div>
+  <div class="location-grid">
+    <div>
+      <div class="map-wrap">
+        <iframe
+          src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3776.5!2d98.9872!3d18.7883!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMTjCsDQ3JzE3LjkiTiA5OMKwNTknMTMuOSJF!5e0!3m2!1sth!2sth!4v1234567890"
+          allowfullscreen="" loading="lazy">
+        </iframe>
+      </div>
+    </div>
+    <div style="display:flex; flex-direction:column; gap:16px; justify-content:center;">
+      <div class="contact-item" style="margin-bottom:0;">
+        <div class="contact-icon">📍</div>
+        <div>
+          <div class="contact-label">ที่อยู่</div>
+          <div class="contact-val">120 ช้างคลาน เมืองเชียงใหม่<br>จังหวัดเชียงใหม่ 50000</div>
+        </div>
+      </div>
+      <div class="contact-item" style="margin-bottom:0;">
+        <div class="contact-icon">🕐</div>
+        <div>
+          <div class="contact-label">เวลาเปิด-ปิด</div>
+          <div class="contact-val">ทุกวัน 09:00 – 20:00 น.<br><span style="color:var(--orange);font-size:13px;">เปิดทุกวันรวมวันหยุดนักขัตฤกษ์</span></div>
+        </div>
+      </div>
+      <div class="contact-item" style="margin-bottom:0;">
+        <div class="contact-icon">🚗</div>
+        <div>
+          <div class="contact-label">การเดินทาง</div>
+          <div class="contact-val" style="font-size:13px; font-weight:400; color:var(--gray); line-height:1.6;">ใกล้ไนท์บาซาร์เชียงใหม่ มีที่จอดรถบริเวณใกล้เคียง สามารถนั่ง Grab หรือ สองแถวได้สะดวก</div>
+        </div>
+      </div>
+      <a href="https://maps.google.com/?q=120+ช้างคลาน+เชียงใหม่" target="_blank" class="btn-primary" style="display:inline-flex; width:fit-content; margin-top:8px;">
+        🗺️ เปิด Google Maps
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- WHY -->
 <section class="section">
   <div class="section-header">
     <div class="section-tag">ทำไมต้องเลือก WP</div>
@@ -737,6 +1018,19 @@ function swapCurrency() {
 document.getElementById('calc-amount').addEventListener('input', calculate);
 document.getElementById('calc-currency').addEventListener('change', calculate);
 
+function toggleFaq(btn) {
+  const answer = btn.nextElementSibling;
+  const isOpen = btn.classList.contains('open');
+  document.querySelectorAll('.faq-q.open').forEach(b => {
+    b.classList.remove('open');
+    b.nextElementSibling.classList.remove('open');
+  });
+  if (!isOpen) {
+    btn.classList.add('open');
+    answer.classList.add('open');
+  }
+}
+
 renderRates();
 calculate();
 setInterval(() => {
@@ -745,172 +1039,3 @@ setInterval(() => {
 </script>
 </body>
 </html>
-<img src="wiang-phing-logo.svg" alt="Wiang Phing Logo" width="200">
-<div class="contact-item">
-  <div class="contact-icon">💬</div>
-  <div>
-    <div class="contact-label">LINE Official</div>
-    <div class="contact-val">@WPEXCHANGE</div>
-    <img src="line-qr.png" alt="LINE QR Code" 
-         style="width:120px; margin-top:10px; border-radius:8px;">
-  </div>
-</div>
-<!-- PROMO BANNER -->
-<div class="promo-banner">
-  <div class="promo-text">
-    <div class="promo-tag">🎉 โปรโมชั่นพิเศษ</div>
-    <div class="promo-msg">แลกหยวนจีน CNY วันนี้ รับเรทพิเศษ!</div>
-    <div class="promo-sub">ยิ่งแลกเยอะ ยิ่งได้เรทดี · ไม่มีค่าธรรมเนียมซ่อน · ทุกวัน 09:00–20:00</div>
-  </div>
-  <a href="https://lin.ee/yDRo21s" class="promo-cta">💬 ถามเรทตอนนี้</a>
-</div>
-<!-- HOW TO EXCHANGE -->
-<section class="section" id="how-to" style="background:#FFF8F0;">
-  <div class="section-header">
-    <div class="section-tag">ขั้นตอน</div>
-    <h2 class="section-title">แลกเงินกับเรา ง่ายมาก 4 ขั้นตอน</h2>
-    <p class="section-sub">ไม่ต้องนัด ไม่ต้องรอคิว ดูเรทออนไลน์แล้วมาแลกได้เลย</p>
-  </div>
-  <div class="steps-grid">
-    <div class="step-card">
-      <div class="step-num">1</div>
-      <div class="step-icon">📱</div>
-      <div class="step-title">ดูเรทออนไลน์</div>
-      <p class="step-desc">เช็คอัตราแลกเปลี่ยนบนเว็บไซต์หรือ LINE อัปเดตทุกวัน ราคาชัดเจน ไม่มีค่าธรรมเนียมซ่อน</p>
-    </div>
-    <div class="step-card">
-      <div class="step-num">2</div>
-      <div class="step-icon">💬</div>
-      <div class="step-title">แจ้งจำนวนทาง LINE</div>
-      <p class="step-desc">ติดต่อผ่าน LINE: WPEXCHANGE แจ้งสกุลเงินและจำนวน ทีมงานตอบกลับรวดเร็ว</p>
-    </div>
-    <div class="step-card">
-      <div class="step-num">3</div>
-      <div class="step-icon">🏦</div>
-      <div class="step-title">มาที่ร้านหรือโอนออนไลน์</div>
-      <p class="step-desc">เดินทางมาที่สาขาเชียงใหม่ หรือสำหรับบริการโอนเงิน ทำได้ทางออนไลน์เลย</p>
-    </div>
-    <div class="step-card">
-      <div class="step-num">4</div>
-      <div class="step-icon">✅</div>
-      <div class="step-title">รับเงินทันที</div>
-      <p class="step-desc">รับเงินสดหรือโอนเข้าบัญชีทันที มีใบเสร็จรับรอง ถูกกฎหมาย มีใบอนุญาตจาก ธปท.</p>
-    </div>
-  </div>
-  <div style="text-align:center; margin-top:36px;">
-    <a href="https://lin.ee/yDRo21s" class="btn-primary" style="display:inline-flex;">💬 เริ่มแลกเงินเลย</a>
-  </div>
-</section>
-<!-- TESTIMONIALS -->
-<section class="section" style="background:#FFF8F0;">
-  <div class="section-header">
-    <div class="section-tag">รีวิวลูกค้า</div>
-    <h2 class="section-title">ลูกค้าพูดถึงเรา</h2>
-  </div>
-  <div class="reviews-grid">
-    <div class="review-card">
-      <div class="review-quote">"</div>
-      <div class="review-stars">★★★★★</div>
-      <p class="review-text">แลกหยวนจีนที่นี่มาหลายปีแล้ว เรทดีมาก ไม่เคยโกง ทีมงานใจดี ตอบ LINE เร็วมาก แนะนำเลยครับ</p>
-      <div class="review-author">
-        <div class="review-avatar">ส</div>
-        <div>
-          <div class="review-name">สมชาย ก.</div>
-          <div class="review-meta">นักธุรกิจ นำเข้าสินค้าจีน · เชียงใหม่</div>
-        </div>
-      </div>
-    </div>
-    <div class="review-card">
-      <div class="review-quote">"</div>
-      <div class="review-stars">★★★★★</div>
-      <p class="review-text">ใช้บริการชิปปิ้งจีน-ไทย สินค้ามาครบ ไม่หาย บริการดีมาก ราคาสมเหตุสมผล จะกลับมาใช้แน่นอน</p>
-      <div class="review-author">
-        <div class="review-avatar">น</div>
-        <div>
-          <div class="review-name">นภาพร ว.</div>
-          <div class="review-meta">เจ้าของร้านค้าออนไลน์ · เชียงใหม่</div>
-        </div>
-      </div>
-    </div>
-    <div class="review-card">
-      <div class="review-quote">"</div>
-      <div class="review-stars">★★★★★</div>
-      <p class="review-text">โอนเงินไปจีนได้เร็วมาก เรทดีกว่าธนาคารเยอะ มีล่ามช่วยเจรจาธุรกิจด้วย ครบจบที่เดียวจริงๆ</p>
-      <div class="review-author">
-        <div class="review-avatar">ว</div>
-        <div>
-          <div class="review-name">วิชัย ป.</div>
-          <div class="review-meta">ผู้นำเข้า-ส่งออก · เชียงราย</div>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- FAQ -->
-<section class="section" id="faq">
-  <div class="section-header">
-    <div class="section-tag">คำถามที่พบบ่อย</div>
-    <h2 class="section-title">FAQ มีคำตอบให้ทุกข้อสงสัย</h2>
-  </div>
-  <div class="faq-list">
-    <div class="faq-item">
-      <button class="faq-q" onclick="toggleFaq(this)">ต้องนัดล่วงหน้าก่อนแลกเงินไหม?<span class="faq-icon">+</span></button>
-      <div class="faq-a">ไม่จำเป็นเลยครับ เดินเข้ามาแลกได้เลย แต่ถ้าแลกจำนวนมาก (เกิน 50,000 บาท) แนะนำให้แจ้งล่วงหน้าทาง LINE เพื่อเตรียมเงินไว้ให้พร้อม</div>
-    </div>
-    <div class="faq-item">
-      <button class="faq-q" onclick="toggleFaq(this)">ต้องใช้เอกสารอะไรบ้าง?<span class="faq-icon">+</span></button>
-      <div class="faq-a">ใช้แค่บัตรประชาชนหรือพาสปอร์ตเท่านั้น ไม่มีเอกสารซับซ้อน บริการถูกต้องตามกฎหมายและได้รับใบอนุญาตจาก ธปท.</div>
-    </div>
-    <div class="faq-item">
-      <button class="faq-q" onclick="toggleFaq(this)">แลกเงินขั้นต่ำเท่าไหร่?<span class="faq-icon">+</span></button>
-      <div class="faq-a">ไม่มีขั้นต่ำครับ แลกได้ทุกจำนวน แต่เรทอาจดีขึ้นสำหรับการแลกจำนวนมาก สอบถามได้ทาง LINE</div>
-    </div>
-    <div class="faq-item">
-      <button class="faq-q" onclick="toggleFaq(this)">ชิปปิ้งจีน-ไทย ใช้เวลากี่วัน?<span class="faq-icon">+</span></button>
-      <div class="faq-a">ทางบก 7–12 วันทำการ ทางเรือ 20–30 วันทำการ ติดตามสถานะได้ตลอดทาง</div>
-    </div>
-    <div class="faq-item">
-      <button class="faq-q" onclick="toggleFaq(this)">แลกสกุลเงินอะไรได้บ้าง?<span class="faq-icon">+</span></button>
-      <div class="faq-a">รองรับมากกว่า 30 สกุล ได้แก่ CNY, USD, EUR, JPY, GBP, SGD, HKD, KRW และอีกมาก สอบถาม LINE ได้เลย</div>
-    </div>
-  </div>
-</section>
-
-<!-- MAP -->
-<section class="section" style="background:#FFF8F0;">
-  <div class="section-header">
-    <div class="section-tag">ที่ตั้ง</div>
-    <h2 class="section-title">หาเราเจอง่ายๆ ใจกลางเชียงใหม่</h2>
-    <p class="section-sub">ใกล้ไนท์บาซาร์ ถนนช้างคลาน เมืองเชียงใหม่</p>
-  </div>
-  <div class="location-grid">
-    <div class="map-wrap">
-      <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3776.5!2d98.9872!3d18.7883!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMTjCsDQ3JzE3LjkiTiA5OMKwNTknMTMuOSJF!5e0!3m2!1sth!2sth!4v1234567890" allowfullscreen="" loading="lazy"></iframe>
-    </div>
-    <div style="display:flex;flex-direction:column;gap:20px;justify-content:center;">
-      <div class="contact-item" style="margin-bottom:0;">
-        <div class="contact-icon">📍</div>
-        <div>
-          <div class="contact-label">ที่อยู่</div>
-          <div class="contact-val">120 ช้างคลาน เมืองเชียงใหม่<br>จังหวัดเชียงใหม่ 50000</div>
-        </div>
-      </div>
-      <div class="contact-item" style="margin-bottom:0;">
-        <div class="contact-icon">🕐</div>
-        <div>
-          <div class="contact-label">เวลาเปิด-ปิด</div>
-          <div class="contact-val">ทุกวัน 09:00 – 20:00 น.<br><span style="color:#E85B1B;font-size:13px;">เปิดรวมวันหยุดนักขัตฤกษ์</span></div>
-        </div>
-      </div>
-      <div class="contact-item" style="margin-bottom:0;">
-        <div class="contact-icon">🚗</div>
-        <div>
-          <div class="contact-label">การเดินทาง</div>
-          <div class="contact-val" style="font-size:13px;font-weight:400;color:#8A8070;line-height:1.6;">ใกล้ไนท์บาซาร์เชียงใหม่ มีที่จอดรถบริเวณใกล้เคียง นั่ง Grab หรือสองแถวได้สะดวก</div>
-        </div>
-      </div>
-      <a href="https://maps.google.com/?q=120+ช้างคลาน+เชียงใหม่" target="_blank" class="btn-primary" style="display:inline-flex;width:fit-content;">🗺️ เปิด Google Maps</a>
-    </div>
-  </div>
-</section>
