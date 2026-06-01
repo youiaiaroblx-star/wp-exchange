@@ -739,16 +739,16 @@
       <div class="form-row">
         <div class="form-group">
           <label>ชื่อ-นามสกุล</label>
-          <input type="text" placeholder="ชื่อของคุณ">
+          <input type="text" id="form-name" placeholder="ชื่อของคุณ">
         </div>
         <div class="form-group">
           <label>เบอร์โทรศัพท์</label>
-          <input type="tel" placeholder="08X-XXX-XXXX">
+          <input type="tel" id="form-phone" placeholder="08X-XXX-XXXX">
         </div>
       </div>
       <div class="form-group">
         <label>บริการที่ต้องการ</label>
-        <select>
+        <select id="form-service">
           <option>แลกเงิน</option>
           <option>รับสั่งซื้อสินค้าจากจีน</option>
           <option>ชิปปิ้ง</option>
@@ -758,9 +758,11 @@
       </div>
       <div class="form-group">
         <label>รายละเอียดเพิ่มเติม</label>
-        <textarea rows="3" placeholder="เช่น สกุลเงิน จำนวน หรือรายละเอียดสินค้า..."></textarea>
+        <textarea rows="3" id="form-detail" placeholder="เช่น สกุลเงิน จำนวน หรือรายละเอียดสินค้า..."></textarea>
       </div>
-      <button class="form-submit">📩 ส่งข้อความหาเรา</button>
+      <button class="form-submit" onclick="submitForm()">📩 ส่งข้อความหาเรา</button>
+      <div id="form-success" style="display:none; text-align:center; color:#22c55e; font-size:14px; margin-top:12px;">✅ ส่งข้อความสำเร็จ! เราจะติดต่อกลับโดยเร็ว</div>
+      <div id="form-error" style="display:none; text-align:center; color:#f87171; font-size:14px; margin-top:12px;">❌ เกิดข้อผิดพลาด กรุณาลองใหม่</div>
       <p style="text-align:center; font-size:12px; color:var(--gray); margin-top:12px;">หรือแชทตรงผ่าน <a href="https://lin.ee/yDRo21s" style="color:var(--orange);">LINE: WPEXCHANGE</a></p>
     </div>
   </div>
@@ -887,6 +889,50 @@ setInterval(fetchRates, 300000);
 setInterval(() => {
   document.getElementById('last-update').textContent = new Date().toLocaleTimeString('th-TH') + ' น.';
 }, 60000);
+
+const FORM_URL = 'https://script.google.com/macros/s/AKfycbwfcHR0fDMiZ31aMTQBJybm0T7gQ_aURVHy7oh3S9S9vsqVAY3EdyuzPPtK59_v6DwO/exec';
+
+async function submitForm() {
+  const name = document.getElementById('form-name').value.trim();
+  const phone = document.getElementById('form-phone').value.trim();
+  const service = document.getElementById('form-service').value;
+  const detail = document.getElementById('form-detail').value.trim();
+
+  if (!name || !phone) {
+    alert('กรุณากรอกชื่อและเบอร์โทรศัพท์');
+    return;
+  }
+
+  const btn = document.querySelector('.form-submit');
+  btn.disabled = true;
+  btn.textContent = '⏳ กำลังส่ง...';
+
+  try {
+    await fetch(FORM_URL, {
+      method: 'POST',
+      mode: 'no-cors',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ name, phone, service, detail })
+    });
+
+    document.getElementById('form-success').style.display = 'block';
+    document.getElementById('form-error').style.display = 'none';
+    document.getElementById('form-name').value = '';
+    document.getElementById('form-phone').value = '';
+    document.getElementById('form-detail').value = '';
+    btn.textContent = '📩 ส่งข้อความหาเรา';
+    btn.disabled = false;
+
+    setTimeout(() => {
+      document.getElementById('form-success').style.display = 'none';
+    }, 5000);
+
+  } catch(e) {
+    document.getElementById('form-error').style.display = 'block';
+    btn.textContent = '📩 ส่งข้อความหาเรา';
+    btn.disabled = false;
+  }
+}
 </script>
 </body>
 </html>
