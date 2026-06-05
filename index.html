@@ -820,7 +820,7 @@
 </footer>
 
 <script>
-const SHEET_URL = 'https://script.google.com/macros/s/AKfycbz90_hKktzoAjURK8kqzpusxesgYCW2cQCYt8HsMqWxaDS1MrqCZ8IygxDD9Rc9O_n1/exec';
+const SHEET_URL = 'https://script.google.com/macros/s/AKfycbzbmPF520AbxzuK1mwirfRl87ntblSuDmWAYLaQJ-vs0c1jL53BMoSfNVcEjFcGgT4s/exec';
 
 const currencyInfo = {
   CNY: { flag:'🇨🇳', name:'หยวนจีน', full:'Chinese Yuan' },
@@ -890,7 +890,7 @@ setInterval(() => {
   document.getElementById('last-update').textContent = new Date().toLocaleTimeString('th-TH') + ' น.';
 }, 60000);
 
-const FORM_URL = 'https://script.google.com/macros/s/AKfycbwfcHR0fDMiZ31aMTQBJybm0T7gQ_aURVHy7oh3S9S9vsqVAY3EdyuzPPtK59_v6DwO/exec';
+const FORM_URL = 'https://script.google.com/macros/s/AKfycbzbmPF520AbxzuK1mwirfRl87ntblSuDmWAYLaQJ-vs0c1jL53BMoSfNVcEjFcGgT4s/exec';
 
 async function submitForm() {
   const name = document.getElementById('form-name').value.trim();
@@ -933,6 +933,22 @@ async function submitForm() {
     btn.disabled = false;
   }
 }
+
+function doCalc() {
+  const amount = parseFloat(document.getElementById('calc-amount').value) || 0;
+  const code = document.getElementById('calc-currency').value;
+  const r = rates[code];
+  if (!r) {
+    document.getElementById('calc-result').textContent = '฿ 0.00';
+    document.getElementById('calc-rate-display').textContent = 'ยังไม่มีเรท';
+    return;
+  }
+  const result = (amount * r.buy).toFixed(2);
+  document.getElementById('calc-result').textContent = '฿ ' + parseFloat(result).toLocaleString('th-TH', {minimumFractionDigits:2});
+  document.getElementById('calc-rate-display').textContent = '1 ' + code + ' = ' + r.buy + ' THB';
+}
+
+document.getElementById('calc-amount').addEventListener('input', doCalc);
 </script>
 </body>
 </html>
