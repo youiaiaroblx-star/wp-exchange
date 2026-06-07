@@ -820,7 +820,7 @@
 </footer>
 
 <script>
-const SHEET_URL = 'https://script.google.com/macros/s/AKfycbzbmPF520AbxzuK1mwirfRl87ntblSuDmWAYLaQJ-vs0c1jL53BMoSfNVcEjFcGgT4s/exec';
+const SHEET_URL = 'https://script.google.com/macros/s/AKfycbxJ9pwdpCej8l73MD35bNn03R_X5P85XEnjTy1-ix5Ot-cUKvaS1zv-9DiOPqfwEh94/exec';
 
 const currencyInfo = {
   CNY: { flag:'🇨🇳', name:'หยวนจีน', full:'Chinese Yuan' },
@@ -836,6 +836,30 @@ const currencyInfo = {
 
 let rates = {};
 
+const BOT_TOKEN = 'eyJvcmciOiI2NzM1NzgwZWM4YzFlYjAwMDEyYTM3NzEiLCJpZCI6ImJhM2QyMDM0OWEyMDQ3Y2M5YmE2NmQwMTQyY2E0YTM4IiwiaCI6Im11cm11cjEyOCJ9';
+
+async function fetchBOTRates() {
+  try {
+    const today = new Date().toISOString().slice(0,10);
+    const res = await fetch(`https://apigw1.bot.or.th/bot/public/Stat-ExchangeRate/v2/DAILY_AVG_EXG_RATE/?start_period=${today}&end_period=${today}`, {
+      headers: { 'X-IBM-Client-Id': BOT_TOKEN }
+    });
+    const data = await res.json();
+    const items = data?.result?.data?.data_detail || [];
+    const botRates = {};
+    items.forEach(item => {
+      botRates[item.currency_id] = {
+        buy: parseFloat(item.buying_sight) || 0,
+        sell: parseFloat(item.selling) || 0
+      };
+    });
+    return botRates;
+  } catch(e) {
+    console.error('BOT API error:', e);
+    return {};
+  }
+}
+
 async function fetchRates() {
   try {
     const res = await fetch(SHEET_URL);
@@ -848,10 +872,12 @@ async function fetchRates() {
   } catch(e) {
     console.error('ดึงเรทไม่ได้:', e);
   }
-  renderRates();
+  // ดึงเรท BOT มาแสดงเปรียบเทียบ
+  const botRates = await fetchBOTRates();
+  renderRates(botRates);
 }
 
-function renderRates() {
+function renderRates(botRates = {}) {
   const container = document.getElementById('rate-rows');
   container.innerHTML = Object.entries(rates).map(([code, r]) => `
     <div class="rate-row">
@@ -864,7 +890,9 @@ function renderRates() {
       </div>
       <div class="rate-val rate-buy">${r.buy.toFixed(2)}</div>
       <div class="rate-val rate-sell">${r.sell.toFixed(2)}</div>
-      <div class="rate-badge"></div>
+      <div class="rate-badge">
+        ${ botRates[code] ? `<span style="font-size:11px; color:#8A8070;">ธปท. ${botRates[code].buy.toFixed(2)}</span>` : '' }
+      </div>
     </div>
   `).join('');
   document.getElementById('last-update').textContent = new Date().toLocaleTimeString('th-TH') + ' น.';
@@ -890,7 +918,7 @@ setInterval(() => {
   document.getElementById('last-update').textContent = new Date().toLocaleTimeString('th-TH') + ' น.';
 }, 60000);
 
-const FORM_URL = 'https://script.google.com/macros/s/AKfycbzbmPF520AbxzuK1mwirfRl87ntblSuDmWAYLaQJ-vs0c1jL53BMoSfNVcEjFcGgT4s/exec';
+const FORM_URL = 'https://script.google.com/macros/s/AKfycbxJ9pwdpCej8l73MD35bNn03R_X5P85XEnjTy1-ix5Ot-cUKvaS1zv-9DiOPqfwEh94/exec';
 
 async function submitForm() {
   const name = document.getElementById('form-name').value.trim();
